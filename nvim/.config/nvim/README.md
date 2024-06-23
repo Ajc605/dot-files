@@ -19,6 +19,8 @@ This package themes the status bar and is very customisable. I am using horizon 
 This provides a file tree, by defualt this is on the left side.
 #### KeyMaps:
 - \<leader\> n => Open tree on the current file
+### folke/noice.nvim
+This plugin provides a clean cmd line popup and clean notifications
 ### nvimtools/none-ls.nvim
 This is build from null-ls, which is no longer being maintained. Althought we have LSP's from Mason and Mason Config this plugins helps bridge the LSP's to other plugins. (I think so anyway)
 ### christoomey/vim-tmux-navigator
@@ -52,6 +54,10 @@ This is another very useful plugin, telescope allows you to search for files or 
 This is the current theme used for neovim. I am using catppuccin dark but I've also other dark themese commented out. If you're using tmux it's worth getting the catppuccin theme for your terminal of cchoice.
 ### nvim-treesitter/nvim-treesitter
 This plugin helps with code highlighting, making easier to read.
+### folke/trouble.nvim
+This plugin is a clean way to see diagnostics from the LSP
+#### Keymaps:
+/<leader/> xx => opens pane with diagnostics for current file/buffer
 ### mbbill/undotree
 This plugin provides a history of changes to the current file.
 #### Keymaps:
