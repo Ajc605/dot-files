@@ -22,6 +22,7 @@ vim.opt.spelllang = "en_gb"
 vim.opt.spelloptions = "camel"
 vim.opt.spell = true
 
+vim.keymap.set("t", "<esc>", '<C-\\><C-n>')
 vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
 vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
 vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
