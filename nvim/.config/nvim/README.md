@@ -32,8 +32,12 @@ I like to use Tmux while developing to move between windows and panles, this plu
 - \<CTRL\> l => Move to right pane 
 ### epwalsh/obsidian.nvim
 This plugin was to use obsidian note taking in the terminal
+### gbprod/phpactor.nvim
+Plugin to help with php annonations and the lsp
 ### xemptuous/sqlua.nvim
 This plugin is to connect to a sql server. I havemn't got round to configuring this yet
+### roobert/tailwindcss-colorizer-cmp.nvim
+Plugin that provides tail wind suggestion, like VS Code
 ### nvim-telescope/telescope.nvim
 This is another very useful plugin, telescope allows you to search for files or fuzzy find in files.
 #### Keymaps:
