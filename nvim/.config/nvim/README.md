@@ -5,11 +5,24 @@ My nvim config
 Provides a nice visual when loading up neovim
 ### completions.lua
 This contains plugins for snippets, mini winodw with a suggested code snippet
+### cameron-wags/rainbow_csv.n vim
+Attempt to find a plugin for csv
+### debug, cameron-wags/rainbow_csv.nvim, rcarriga/nvim-dap-ui, theHamsta/nvim-dap-virtual-text and nvim-neotest/nvim-nio
+These plugins use the Debug Adaptor Protocal (DAP) to allow debugging in nvim, like with xDebug. This took some setting up I would suggest following what's on nvim-dap github to set it up.
+#### KeyMaps:
+- \<leader\> dt => Creates break point on the current line.
+- \<leader\> dc => Starts the Debugger and continues to next break point.
+- \<leader\> do => Step Over.
+- \<leader\> di => Step Into.
+- \<leader\> du => Toggles UI.
 ### lewis6991/gitsigns.nvim
 This plugin can be used for some git stuff.
 #### KeyMaps:
 - \<leader\> gt => Togger line git blame
 - \<leader\> gp => Preview hunk, changes
+- \<leader\> hu => Undo hunk
+- \<leader\> nh => Next hunk
+- \<leader\> Nh => Previous hunk
 There are more uses for this plug (see github for a full list), however these ones fit my workflo
 ### lsp-config.lua
 This file contains serveral plugins to configur LSP. LSP's reads files and will look for coding erros, provide suggestions and fromating. This is using Mason and Mason LSP config to manage my LSP. I'm a PHP deveploer and currently using phpactor as my main LSP 

@@ -9,7 +9,7 @@ vim.g.mapleader = " "
 vim.g.have_nerd_font = true
 vim.g.vim_markdown_frontmatter = 1
 vim.g.ultest_deprecation_notice = 0
-
+vim.g.python3_host_prog = "/usr/local/bin/python3"
 vim.wo.number = true
 
 vim.opt.conceallevel = 1
