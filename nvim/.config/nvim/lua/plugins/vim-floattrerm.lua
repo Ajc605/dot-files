@@ -1,6 +1,6 @@
 return {
     "voldikss/vim-floaterm",
-    config = function ()
+    config = function()
         vim.keymap.set("n", "<leader>ft", ":FloatermToggle<CR>")
     end
 }

@@ -1,71 +1,114 @@
-vim.g.phpactorInputListStrategy = "phpactor#input#list#fzf"
-
 return {
-	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver", "phpactor", "intelephense", "lemminx" },
-			})
-		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			lspconfig.lua_ls.setup({ capabilities = capabilities })
-			lspconfig.tsserver.setup({ capabilities = capabilities })
-			lspconfig.tailwindcss.setup({ capabilities = capabilities })
-			lspconfig.intelephense.setup({ capabilities = capabilities })
-			lspconfig.lemminx.setup({ capabilities = capabilities })
-			lspconfig.phpactor.setup({
-				capabilities = capabilities,
-				on_attach = function(client, bufnr)
-					-- Define key mappings for phpactor refactoring commands
-					local function buf_set_keymap(...)
-						vim.api.nvim_buf_set_keymap(bufnr, ...)
-					end
-					local function buf_set_option(...)
-						vim.api.nvim_buf_set_option(bufnr, ...)
-					end
+    {
+        "williamboman/mason.nvim",
+        cmd = "Mason",
+        lazy = true,
+        config = function()
+            require("mason").setup()
+        end,
+    },
+    {
+        'jay-babu/mason-null-ls.nvim',
+        event = "VeryLazy",
+        config = function()
+            require("mason-null-ls").setup({
+                ensure_installed = { "prettierd" },
+            })
+        end
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "lua_ls",
+                    "ts_ls",
+                    -- "tailwindcss",
+                    "eslint",
+                    -- "phpactor@2024.05.21",
+                    'intelephense',
+                    "yamlls",
+                    "lemminx",
+                },
+            })
+        end,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        event = "BufReadPre",
+        config = function()
+            local lspconfig = require("lspconfig")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-					local opts = { noremap = true, silent = true }
+            local basicLsp = {
+                'lua_ls',
+                'ts_ls',
+                -- 'tailwindcss',
+                'eslint',
+                'lemminx',
+                -- 'intelephense',
+                -- 'phpactor',
+            }
 
-					-- Define your key mappings for phpactor refactoring here
-					buf_set_keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-					buf_set_keymap("n", "<leader>ri", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-					buf_set_keymap("n", "<leader>rt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-					buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-				end,
-			})
+            for _, lsp in ipairs(basicLsp) do
+                lspconfig[lsp].setup({ capabilities = capabilities })
+            end
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-			vim.keymap.set("n", "<leader>gD", vim.lsp.buf.execute_command, {})
-			-- Set the scrolloff to a higher value
-			vim.opt.scrolloff = 999
+            lspconfig.phpactor.setup({
+                capabilities = capabilities,
+                on_attach = function(client, bufnr)
+                    local function buf_set_keymap(...)
+                        vim.api.nvim_buf_set_keymap(bufnr, ...)
+                    end
 
-			-- Create the key mapping
-			-- vim.keymap.nnoremap("<leader>gd", function()
-			-- 	-- Jump to the definition
-			-- 	vim.lsp.buf.definition()
+                    local opts = { noremap = true, silent = true }
 
-			-- 	-- Force the cursor to stay in the middle of the screen
-			-- 	vim.cmd("normal! zz")
-			-- end, { silent = true })
-			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-			-- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-		end,
-	},
+                    -- Define your key mappings for phpactor refactoring here
+                    -- buf_set_keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+                    buf_set_keymap("n", "<leader>ri", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+                    -- buf_set_keymap("n", "<leader>rt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+                    buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+                end,
+                -- init_options = {
+                --     ["symfony.enabled"] = true,
+                --     ["phpunit.enabled"] = true,
+                --     ["language_server_phpstan.enabled"] = false,
+                --     ["language_server_psalm.enabled"] = false,
+                --     ["indexer.poll_time"] = 5000,
+                --     ["indexer.stub_cache.enabled"] = true,
+                --     ["indexer.include_patterns"] = { "**/*.php" },
+                --     ["indexer.exclude_patterns"] = { "**/vendor/**", "**/node_modules/**", "**/.git/**" },
+                --     ["completion_worse.completor.worse.disabled"] = true,
+                --     ["language_server_completion.trim_leading_dollar"] = true,
+                --     ["language_server_completion.complete_constructor_parameters"] = false,
+                --     ["language_server_completion.complete_fully_qualified_class_names"] = false,
+                --     ["language_server.timeout"] = 30,
+                --     ["language_server_completion.timeout"] = 10,
+                -- },
+                cmd = { "phpactor", "language-server" },
+                -- Add root directory detection
+                root_dir = lspconfig.util.root_pattern("composer.json", ".git", "phpactor.json", "phpactor.yml"),
+                -- Add file type restrictions
+                filetypes = { "php" },
+                -- Add timeout settings
+                flags = {
+                    debounce_text_changes = 150,
+                },
+            })
+
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+            vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, {})
+            -- vim.keymap.set("n", "<leader>ri", vim.lsp.buf.implementation, {})
+            -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+            -- vim.keymap.set("n", "<leader>gD", vim.lsp.buf.execute_command, {})
+            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+            vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+            vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+            vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+            -- Set the scrolloff to a higher value
+            vim.opt.scrolloff = 999
+        end,
+    },
 }

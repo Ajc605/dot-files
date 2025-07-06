@@ -1,101 +1,162 @@
 # nvim
+
 My nvim config
+
 ## Plugins
+
 ### goolord/alpha-nvim
+
 Provides a nice visual when loading up neovim
-### completions.lua
-This contains plugins for snippets, mini winodw with a suggested code snippet
-### cameron-wags/rainbow_csv.n vim
-Attempt to find a plugin for csv
-### debug, cameron-wags/rainbow_csv.nvim, rcarriga/nvim-dap-ui, theHamsta/nvim-dap-virtual-text and nvim-neotest/nvim-nio
-These plugins use the Debug Adaptor Protocal (DAP) to allow debugging in nvim, like with xDebug. This took some setting up I would suggest following what's on nvim-dap github to set it up.
+
+### Completions and Snippets
+
+- LuaSnip
+- friendly-snippets
+- cmp-nvim-lsp
+- cmp_luasnip
+  Provides code completion and snippet functionality
+
+### eslint.nvim
+
+ESLint integration for Neovim
+
+### Debug Support
+
+These plugins use the Debug Adaptor Protocol (DAP) to allow debugging in nvim, like with xDebug.
+
 #### KeyMaps:
-- \<leader\> dt => Creates break point on the current line.
-- \<leader\> dc => Starts the Debugger and continues to next break point.
-- \<leader\> do => Step Over.
-- \<leader\> di => Step Into.
-- \<leader\> du => Toggles UI.
+
+- `<leader>dt` => Creates break point on the current line
+- `<leader>dc` => Starts the Debugger and continues to next break point
+- `<leader>do` => Step Over
+- `<leader>di` => Step Into
+- `<leader>du` => Toggles UI
+
 ### lewis6991/gitsigns.nvim
-This plugin can be used for some git stuff.
+
+Git integration for showing changes in the sign column.
+
 #### KeyMaps:
-- \<leader\> gt => Togger line git blame
-- \<leader\> gp => Preview hunk, changes
-- \<leader\> hu => Undo hunk
-- \<leader\> nh => Next hunk
-- \<leader\> Nh => Previous hunk
-There are more uses for this plug (see github for a full list), however these ones fit my workflo
-### lsp-config.lua
-This file contains serveral plugins to configur LSP. LSP's reads files and will look for coding erros, provide suggestions and fromating. This is using Mason and Mason LSP config to manage my LSP. I'm a PHP deveploer and currently using phpactor as my main LSP 
-### lsp-config.lua
-This package themes the status bar and is very customisable. I am using horizon theme, I'd suggest checking out there github to find the theme that suits you.
+
+- `<leader>gt` => Toggle line git blame
+- `<leader>gp` => Preview hunk changes
+- `<leader>hu` => Undo hunk
+- `<leader>nh` => Next hunk
+- `<leader>Nh` => Previous hunk
+
+### LSP Configuration
+
+Uses Mason and Mason-lspconfig to manage Language Server Protocols. Currently configured for PHP development using phpactor.
+
+### Theme
+
+Using Catppuccin theme for a modern, clean look. If you're using tmux, consider getting the matching Catppuccin theme for your terminal.
+
 ### nvim-neo-tree/neo-tree.nvim
-This provides a file tree, by defualt this is on the left side.
+
+File explorer tree.
+
 #### KeyMaps:
-- \<leader\> n => Open tree on the current file
+
+- `<leader>n` => Open tree on the current file
+
 ### folke/noice.nvim
-This plugin provides a clean cmd line popup and clean notifications
+
+Enhanced command line and notifications UI
+
 ### nvimtools/none-ls.nvim
-This is build from null-ls, which is no longer being maintained. Althought we have LSP's from Mason and Mason Config this plugins helps bridge the LSP's to other plugins. (I think so anyway)
+
+Bridges LSP functionality with other tools
+
 ### christoomey/vim-tmux-navigator
-I like to use Tmux while developing to move between windows and panles, this plugins allows the use of moving between neovim windows and tmux panes. You will also need to install the Tmuc package 
-#### Keymaps
-- \<CTRL\> h => Move to left pane 
-- \<CTRL\> j => Move to down pane 
-- \<CTRL\> k => Move to up pane 
-- \<CTRL\> l => Move to right pane 
+
+Seamless navigation between Neovim windows and tmux panes.
+
+#### Keymaps:
+
+- `<CTRL>h` => Move to left pane
+- `<CTRL>j` => Move to down pane
+- `<CTRL>k` => Move to up pane
+- `<CTRL>l` => Move to right pane
+
 ### epwalsh/obsidian.nvim
-This plugin was to use obsidian note taking in the terminal
+
+Obsidian integration for note-taking
+
 ### gbprod/phpactor.nvim
-Plugin to help with php annonations and the lsp
-### xemptuous/sqlua.nvim
-This plugin is to connect to a sql server. I havemn't got round to configuring this yet
-### roobert/tailwindcss-colorizer-cmp.nvim
-Plugin that provides tail wind suggestion, like VS Code
+
+PHP development tools and LSP support
+
 ### nvim-telescope/telescope.nvim
-This is another very useful plugin, telescope allows you to search for files or fuzzy find in files.
+
+Fuzzy finder and file navigation.
+
 #### Keymaps:
-- \<leader\> sh => Search Help 
-- \<leader\> sk => Search Keymap 
-- \<leader\> sf => Search Files 
-- \<leader\> ss => Search Select Telescope
-- \<leader\> sw => Search Current Word
-- \<leader\> sd => Search Diagnostics
-- \<leader\> sr => Search Resume 
-- \<leader\><leader\> => Find current buffers 
-- \<leader\> fg => Live Grep
-- \<leader\> fp => Previouse Opened Files
-- \<leader\> sr => LSP Reference
-- \<leader\> / => Fuzzy Find Current File
-- \<ctnl\> p => Search Files 
-### theme.lua/catppuccin/nvim
-This is the current theme used for neovim. I am using catppuccin dark but I've also other dark themese commented out. If you're using tmux it's worth getting the catppuccin theme for your terminal of cchoice.
+
+- `<leader>sh` => Search Help
+- `<leader>sk` => Search Keymap
+- `<leader>sf` => Search Files
+- `<leader>ss` => Search Select Telescope
+- `<leader>sw` => Search Current Word
+- `<leader>sd` => Search Diagnostics
+- `<leader>sr` => Search Resume
+- `<leader><leader>` => Find current buffers
+- `<leader>fg` => Live Grep
+- `<leader>fp` => Previous Opened Files
+- `<leader>sr` => LSP Reference
+- `<leader>/` => Fuzzy Find Current File
+- `<CTRL>p` => Search Files
+
 ### nvim-treesitter/nvim-treesitter
-This plugin helps with code highlighting, making easier to read.
+
+Syntax highlighting and code parsing
+
 ### folke/trouble.nvim
-This plugin is a clean way to see diagnostics from the LSP
+
+Enhanced error, warning, and diagnostic viewing.
+
 #### Keymaps:
-/<leader/> xx => opens pane with diagnostics for current file/buffer
+
+- `<leader>xx` => Opens pane with diagnostics for current file/buffer
+
 ### mbbill/undotree
-This plugin provides a history of changes to the current file.
+
+Visual representation of file change history.
+
 #### Keymaps:
-- \<leader\> u => Toggle undo tree
+
+- `<leader>u` => Toggle undo tree
+
 ### tpope/vim-commentary
-This plugin add's keymaps for quickly commenting out lines
+
+Quick commenting functionality.
+
 #### Keymaps:
-- (normal mode) gcc => comments out the current line, can be prefixed with number of lines to comment out
-- (visual mode) gc => comments out the selected lines
+
+- (normal mode) `gcc` => Comments out the current line
+- (visual mode) `gc` => Comments out the selected lines
+
 ### voldikss/vim-floaterm
-This pluging provides a floating nvim terminal, which is very customisable. This is great if you want to run a command quick.
+
+Floating terminal window.
+
 #### Keymaps:
-- \<Esc\\> => Exit Terminal mode (Insert mode for terminal)
-- \<leader\> ft => Toggle floating terminal 
+
+- `<Esc>` => Exit Terminal mode
+- `<leader>ft` => Toggle floating terminal
+
 ### RRethy/vim-illuminate
-This plugins will hight all places were the current varible is being used, making clealier to read your code.
+
+Highlights other uses of the current word under the cursor
+
 ### vim-test/vim-test
-This plugin is used to run tests wihtout leaving neovim, I have this setup with my tmux to open a new pane at the bottom
+
+Test runner integration.
+
 #### Keymaps:
-- \<leader\> t => Test nearest test 
-- \<leader\> T => Test current file 
-- \<leader\> a => Test all tests
-- \<leader\> l => Rerun last test 
-- \<leader\> g => Go to last test
+
+- `<leader>t` => Test nearest test
+- `<leader>T` => Test current file
+- `<leader>a` => Test all tests
+- `<leader>l` => Rerun last test
+- `<leader>g` => Go to last test

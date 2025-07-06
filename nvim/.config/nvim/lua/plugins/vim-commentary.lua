@@ -1,3 +1,5 @@
 return {
-    'tpope/vim-commentary'
+    'tpope/vim-commentary',
+    lazy = true,
+    keys = { { "<leader>gc" }, { "<leader>gcc" } },
 }
