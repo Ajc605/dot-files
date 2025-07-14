@@ -84,5 +84,55 @@ return { -- Fuzzy Finder (files, lsp, etc)
                 end,
             })
         end, { desc = "[S]earch and send to [Q]uickfix" })
+
+        -- Symfony-specific file navigation
+        vim.keymap.set('n', '<leader>sC', function()
+            builtin.find_files({
+                cwd = 'src/Controller/',
+                prompt_title = 'Symfony Controllers'
+            })
+        end, { desc = 'Find Symfony Controllers' })
+
+        vim.keymap.set('n', '<leader>sE', function()
+            builtin.find_files({
+                cwd = 'src/Entity/',
+                prompt_title = 'Symfony Entities'
+            })
+        end, { desc = 'Find Symfony Entities' })
+
+        vim.keymap.set('n', '<leader>sR', function()
+            builtin.find_files({
+                cwd = 'src/Repository/',
+                prompt_title = 'Symfony Repositories'
+            })
+        end, { desc = 'Find Symfony Repositories' })
+
+        vim.keymap.set('n', '<leader>sS', function()
+            builtin.find_files({
+                cwd = 'src/Service/',
+                prompt_title = 'Symfony Services'
+            })
+        end, { desc = 'Find Symfony Services' })
+
+        vim.keymap.set('n', '<leader>sF', function()
+            builtin.find_files({
+                cwd = 'src/Form/',
+                prompt_title = 'Symfony Forms'
+            })
+        end, { desc = 'Find Symfony Forms' })
+
+        vim.keymap.set('n', '<leader>sT', function()
+            builtin.find_files({
+                cwd = 'tests/',
+                prompt_title = 'Tests'
+            })
+        end, { desc = 'Find Tests' })
+
+        vim.keymap.set('n', '<leader>sy', function()
+            builtin.find_files({
+                find_command = { 'find', '.', '-name', '*.yaml', '-o', '-name', '*.yml' },
+                prompt_title = 'YAML Config Files'
+            })
+        end, { desc = 'Find YAML Config Files' })
     end,
 }

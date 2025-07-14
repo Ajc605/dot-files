@@ -54,6 +54,67 @@ return {
                 lspconfig[lsp].setup({ capabilities = capabilities })
             end
 
+            -- Enhanced Intelephense setup for Symfony development
+            -- lspconfig.intelephense.setup({
+            --     capabilities = capabilities,
+            --     settings = {
+            --         intelephense = {
+            --             stubs = {
+            --                 "bcmath", "bz2", "calendar", "Core", "curl", "date",
+            --                 "dba", "dom", "enchant", "fileinfo", "filter", "ftp",
+            --                 "gd", "gettext", "hash", "iconv", "imap", "intl",
+            --                 "json", "ldap", "libxml", "mbstring", "mcrypt",
+            --                 "mysql", "mysqli", "password", "pcntl", "pcre",
+            --                 "PDO", "pdo_mysql", "Phar", "readline", "recode",
+            --                 "Reflection", "regex", "session", "SimpleXML", "soap",
+            --                 "sockets", "sodium", "SPL", "standard", "superglobals",
+            --                 "sysvsem", "sysvshm", "tokenizer", "xml", "xdebug",
+            --                 "xmlreader", "xmlwriter", "yaml", "zip", "zlib",
+            --                 "symfony", "doctrine", "phpunit", "apiplatform"
+            --             },
+            --             files = {
+            --                 maxSize = 5000000,
+            --                 associations = {
+            --                     "*.php",
+            --                     "*.phtml"
+            --                 },
+            --                 exclude = {
+            --                     "**/vendor/**",
+            --                     "**/node_modules/**",
+            --                     "**/.git/**",
+            --                     "**/var/cache/**",
+            --                     "**/var/log/**"
+            --                 }
+            --             },
+            --             format = {
+            --                 enable = true
+            --             },
+            --             completion = {
+            --                 fullyQualifyGlobalConstantsAndFunctions = false,
+            --                 insertUseDeclaration = true,
+            --                 triggerParameterHints = true
+            --             },
+            --             diagnostics = {
+            --                 enable = true
+            --             }
+            --         }
+            --     },
+            --     on_attach = function(client, bufnr)
+            --         local function buf_set_keymap(...)
+            --             vim.api.nvim_buf_set_keymap(bufnr, ...)
+            --         end
+            --
+            --         local opts = { noremap = true, silent = true }
+            --         buf_set_keymap("n", "<leader>ri", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+            --         buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+            --     end,
+            --     root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
+            --     filetypes = { "php" },
+            --     flags = {
+            --         debounce_text_changes = 150,
+            --     },
+            -- })
+            --
             lspconfig.phpactor.setup({
                 capabilities = capabilities,
                 on_attach = function(client, bufnr)
@@ -69,22 +130,22 @@ return {
                     -- buf_set_keymap("n", "<leader>rt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
                     buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
                 end,
-                -- init_options = {
-                --     ["symfony.enabled"] = true,
-                --     ["phpunit.enabled"] = true,
-                --     ["language_server_phpstan.enabled"] = false,
-                --     ["language_server_psalm.enabled"] = false,
-                --     ["indexer.poll_time"] = 5000,
-                --     ["indexer.stub_cache.enabled"] = true,
-                --     ["indexer.include_patterns"] = { "**/*.php" },
-                --     ["indexer.exclude_patterns"] = { "**/vendor/**", "**/node_modules/**", "**/.git/**" },
-                --     ["completion_worse.completor.worse.disabled"] = true,
-                --     ["language_server_completion.trim_leading_dollar"] = true,
-                --     ["language_server_completion.complete_constructor_parameters"] = false,
-                --     ["language_server_completion.complete_fully_qualified_class_names"] = false,
-                --     ["language_server.timeout"] = 30,
-                --     ["language_server_completion.timeout"] = 10,
-                -- },
+                init_options = {
+                    ["symfony.enabled"] = true,
+                    ["phpunit.enabled"] = true,
+                    ["language_server_phpstan.enabled"] = false,
+                    ["language_server_psalm.enabled"] = false,
+                    ["indexer.poll_time"] = 5000,
+                    ["indexer.stub_cache.enabled"] = true,
+                    ["indexer.include_patterns"] = { "**/*.php" },
+                    ["indexer.exclude_patterns"] = { "**/vendor/**", "**/node_modules/**", "**/.git/**", "**/var/**" },
+                    ["completion_worse.completor.worse.disabled"] = true,
+                    ["language_server_completion.trim_leading_dollar"] = true,
+                    ["language_server_completion.complete_constructor_parameters"] = false,
+                    ["language_server_completion.complete_fully_qualified_class_names"] = false,
+                    ["language_server.timeout"] = 30,
+                    ["language_server_completion.timeout"] = 10,
+                },
                 cmd = { "phpactor", "language-server" },
                 -- Add root directory detection
                 root_dir = lspconfig.util.root_pattern("composer.json", ".git", "phpactor.json", "phpactor.yml"),
