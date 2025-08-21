@@ -3,6 +3,7 @@ return {
     dependencies = {
         "rcarriga/nvim-notify",
     },
+    event = "VimEnter",
     config = function()
         require("noice").setup({
             lsp = {

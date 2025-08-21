@@ -1,7 +1,7 @@
 return {
     {
         "hrsh7th/cmp-nvim-lsp",
-        event = "BufReadPre"
+        event = { "BufReadPre", "BufNewFile" }
     },
     {
         "L3MON4D3/LuaSnip",

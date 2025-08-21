@@ -283,10 +283,214 @@ Uses **Lazy.nvim** for efficient plugin management:
 
 ## 🚀 Performance Notes
 
+- **Optimized startup** - Heavily optimized for fast boot times (~1000ms)
 - **Lazy loading** - Most plugins load only when needed
-- **Startup time** - `:StartupTime` to profile boot performance
+- **Startup profiling** - `:StartupTime` to profile boot performance
 - **LSP optimization** - Configured for large Symfony projects
 - **File exclusions** - Vendor/cache directories ignored
+- **Disabled plugins** - Unnecessary vim plugins disabled for speed
+- **Conditional loading** - Dashboard only loads when opening nvim without files
+
+---
+
+## 📋 Complete Keybinding Cheatsheet
+
+### 🔧 Basic Neovim Operations
+
+#### Essential Navigation
+- `<C-h/j/k/l>` - Navigate between windows/tmux panes
+- `<Esc>` - Clear search highlighting
+- `<leader> fl` - Switch to last buffer
+- `<leader> q` - Open quickfix list
+- `<leader> Q` - Close quickfix list
+- `<leader>v` - Vertical split
+
+#### Terminal
+- `<Esc>` (in terminal) - Enter normal mode from terminal
+
+### 🔍 Search & Navigation (Telescope)
+
+#### File Finding
+- `<C-p>` - Find files (quick access)
+- `<leader>sf` - Search files
+- `<leader>fp` - Previous opened files
+- `<leader>fg` - Live grep search
+- `<leader>/` - Fuzzy search in current buffer
+- `<leader>s/` - Search in open files
+- `<leader>sn` - Search Neovim config files
+
+#### System Search
+- `<leader>sh` - Search help tags
+- `<leader>sk` - Search keymaps
+- `<leader>ss` - Search telescope builtin
+- `<leader>sw` - Search current word
+- `<leader>sd` - Search diagnostics
+- `<leader>sr` - Resume last search
+- `<leader><leader>` - Find buffers
+
+#### Symfony-Specific Navigation
+- `<leader>sC` - Find Controllers
+- `<leader>sE` - Find Entities
+- `<leader>sR` - Find Repositories
+- `<leader>sS` - Find Services
+- `<leader>sF` - Find Forms
+- `<leader>sT` - Find Tests
+- `<leader>sy` - Find YAML config files
+
+### 🐘 PHP & LSP Features
+
+#### Code Navigation
+- `K` - Show hover information
+- `<leader>gd` - Go to definition
+- `<leader>gr` - Go to references
+- `<leader>ri` - Go to implementation
+- `<leader>ca` - Code actions
+- `<leader>rr` - Rename symbol
+- `<leader>e` - Show diagnostic errors
+- `<leader>q` - Open diagnostic quickfix
+- `[d` - Previous diagnostic
+- `]d` - Next diagnostic
+
+#### Code Formatting
+- `<leader>gf` - Format buffer
+
+### 🎮 Symfony Console Integration
+
+#### Entity & Structure
+- `<leader>sc` - Symfony Console Commands
+- `<leader>sr` - Show Symfony Routes
+- `<leader>se` - Create Entity
+- `<leader>sC` - Create Controller
+- `<leader>sf` - Create Form
+- `<leader>sm` - Create Migration
+- `<leader>st` - Create Test
+
+#### Database (Doctrine)
+- `<leader>dm` - Run Doctrine Migrations
+- `<leader>ds` - Update Doctrine Schema
+- `<leader>dv` - Validate Doctrine Schema
+- `<leader>dd` - Generate Migration Diff
+- `<leader>dr` - Rollup Migrations
+
+#### Cache Management
+- `<leader>cc` - Clear Symfony Cache
+- `<leader>cw` - Warmup Symfony Cache
+
+#### Debugging
+- `<leader>dbr` - Debug Routes
+- `<leader>dbc` - Debug Container
+- `<leader>dbe` - Debug Event Dispatcher
+
+### 🗄️ Database Management
+
+#### Database UI
+- `<leader>db` - Open Database UI
+- `<leader>dt` - Toggle Database UI
+- `<leader>df` - Find DB Buffer
+- `<leader>dr` - Rename DB Buffer
+- `<leader>dq` - Last Query Info
+
+### 🌐 API Development
+
+#### REST API Testing
+- `<leader>ar` - Run API Request
+- `<leader>ap` - Preview API Request
+- `<leader>al` - Re-run Last Request
+
+#### API Platform
+- `<leader>apo` - Export OpenAPI Spec
+- `<leader>apd` - Debug API Platform
+
+### 🧪 Testing (PHPUnit)
+
+#### Basic Test Operations
+- `<leader>t` - Test nearest test
+- `<leader>T` - Test current file
+- `<leader>a` - Run all tests
+- `<leader>l` - Rerun last test
+- `<leader>g` - Visit test file
+
+#### Advanced Testing
+- `<leader>tf` - Test with filter
+- `<leader>tc` - Test coverage report
+- `<leader>td` - Test debug mode
+
+#### Test Database
+- `<leader>tdb` - Create test database
+- `<leader>tdm` - Migrate test database
+- `<leader>tdf` - Load test fixtures
+
+### 🐛 Debugging (DAP)
+
+#### Breakpoints & Control
+- `<leader>dt` - Toggle breakpoint
+- `<leader>dc` - Continue/start debugging
+- `<leader>do` - Step over
+- `<leader>di` - Step into
+- `<leader>du` - Toggle debug UI
+
+### 📝 YAML Configuration
+
+#### YAML Operations
+- `<leader>yv` - Validate YAML
+- `<leader>yf` - Format YAML
+- `<leader>yt` - Telescope YAML files
+
+### 🌲 File Management
+
+#### File Explorer (Neo-tree)
+- `<leader>n` - Toggle file explorer
+
+#### Floating Terminal
+- `<leader>ft` - Toggle floating terminal
+
+### 🔗 Git Integration
+
+#### Git Operations
+- `<leader>gt` - Toggle git blame
+- `<leader>gp` - Preview hunk changes
+- `<leader>hu` - Undo hunk
+- `<leader>nh` - Next hunk
+- `<leader>Nh` - Previous hunk
+
+### 📖 Markdown
+
+#### Markdown Preview
+- `:MarkdownPreview` - Open preview in browser
+- `:MarkdownPreviewToggle` - Toggle preview
+- `:MarkdownPreviewStop` - Stop preview
+
+### 🔧 Development Tools
+
+#### Code Editing
+- `gcc` - Toggle comment (line)
+- `gc` - Toggle comment (visual selection)
+- `<leader>u` - Open undo tree
+
+#### Diagnostics & Errors
+- `<leader>xx` - Toggle Trouble (diagnostics)
+
+### 🎨 AI Assistant
+
+#### Aider Integration
+- `<leader>aa` - Open Aider with Gemini Flash
+
+### ⚙️ Plugin Management
+
+#### Lazy.nvim
+- `:Lazy` - Open plugin manager
+- `:Lazy sync` - Update plugins
+- `:Lazy clean` - Remove unused plugins
+- `:Lazy profile` - Performance profiling
+
+#### Performance
+- `:StartupTime` - Profile startup performance
+
+### 📚 Help & Documentation
+
+#### Built-in Help
+- `:help` - Open help
+- `:checkhealth` - Check Neovim health
 
 ---
 

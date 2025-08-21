@@ -6,7 +6,7 @@ vim.g.ultest_deprecation_notice = 0
 vim.wo.number = true
 vim.g.phpactorInputListStrategy = 'phpactor#input#list#fzf'
 
-vim.opt.rtp:append('/usr/local/opt/fzf')
+-- vim.opt.rtp:append('/usr/local/opt/fzf')  -- Commented out for faster startup
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -25,7 +25,7 @@ vim.opt.hlsearch = true
 vim.opt.spelllang = "en_gb"
 vim.opt.spelloptions = "camel"
 vim.opt.spell = true
-vim.opt.foldmethod = 'syntax'
+vim.opt.foldmethod = 'manual'  -- Changed from 'syntax' for faster startup
 vim.opt.foldlevelstart = 99
 
 local keymap = vim.keymap.set
@@ -41,16 +41,10 @@ keymap("n", "<leader> q", "<cmd>botright copen<CR>")
 keymap("n", "<leader> Q", "<cmd>cclose<CR>")
 keymap("n", "<leader>v", "<cmd>vsplit<CR>")
 
-vim.defer_fn(function()
-  vim.api.nvim_create_autocmd("TextYankPost", {
-      desc = "Highlight when yanking (copying) text",
-      group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-      callback = function()
-          vim.highlight.on_yank()
-      end,
-  })
-end, 0)
-
-vim.defer_fn(function()
-  vim.cmd("syntax on")
-end, 0)  -- This defers it until after the editor is ready
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})

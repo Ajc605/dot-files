@@ -1,6 +1,6 @@
 return {
     "nvimtools/none-ls.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "nvimtools/none-ls-extras.nvim",
         "MunifTanjim/eslint.nvim",
