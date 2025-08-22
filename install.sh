@@ -142,6 +142,25 @@ install_aws_cli() {
     rm -rf "$temp_dir"
 }
 
+install_fnm() {
+    log_info "Checking for fnm installation..."
+    
+    if command -v fnm &> /dev/null; then
+        log_success "fnm is already installed"
+        log_info "Current fnm version: $(fnm --version)"
+        return 0
+    fi
+    
+    log_warning "Installing fnm..."
+    
+    if curl -fsSL https://fnm.vercel.app/install | bash; then
+        log_success "fnm installed successfully"
+    else
+        log_error "fnm installation failed"
+        return 1
+    fi
+}
+
 install_development_tools() {
     log_info "Installing development tools..."
     
@@ -272,6 +291,7 @@ main() {
     install_oh_my_zsh
     check_and_install_homebrew
     install_aws_cli
+    install_fnm
     install_development_tools
     install_applications
     install_php_extensions
