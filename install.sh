@@ -174,47 +174,40 @@ install_development_tools() {
 install_applications() {
     log_info "Installing GUI applications..."
     
-    local casks=(
-        "docker"
-        "postman"
-    )
-    
-    for cask in "${casks[@]}"; do
-        log_info "Checking for $cask..."
-        
-        if brew list --cask "$cask" &> /dev/null; then
-            log_success "$cask is already installed"
+    # Docker
+    log_info "Checking for Docker..."
+    if [[ -d "/Applications/Docker.app" ]]; then
+        log_success "Docker is already installed"
+    elif brew list --cask docker &> /dev/null; then
+        log_success "Docker is already installed (via Homebrew)"
+    else
+        log_warning "Installing Docker..."
+        if brew install --cask docker; then
+            log_success "Docker installed successfully"
         else
-            log_warning "Installing $cask..."
-            if brew install --cask "$cask"; then
-                log_success "$cask installed successfully"
-            else
-                log_error "Failed to install $cask"
-            fi
+            log_error "Failed to install Docker"
         fi
-    done
+    fi
+    
+    # Postman
+    log_info "Checking for Postman..."
+    if [[ -d "/Applications/Postman.app" ]]; then
+        log_success "Postman is already installed"
+    elif brew list --cask postman &> /dev/null; then
+        log_success "Postman is already installed (via Homebrew)"
+    else
+        log_warning "Installing Postman..."
+        if brew install --cask postman; then
+            log_success "Postman installed successfully"
+        else
+            log_error "Failed to install Postman"
+        fi
+    fi
 }
 
 install_php_extensions() {
-    log_info "Installing PHP extensions..."
-    
-    if ! command -v pecl &> /dev/null; then
-        log_error "PECL is not available. PHP may not be properly installed."
-        return 1
-    fi
-    
-    log_info "Checking for Xdebug..."
-    if pecl list | grep -q xdebug; then
-        log_success "Xdebug is already installed"
-    else
-        log_warning "Installing Xdebug..."
-        if pecl install xdebug; then
-            log_success "Xdebug installed successfully"
-        else
-            log_error "Failed to install Xdebug"
-            return 1
-        fi
-    fi
+    log_info "PHP extensions installation skipped"
+    log_info "Install Xdebug manually if needed: pecl install xdebug"
 }
 
 deploy_dotfiles() {
