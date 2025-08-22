@@ -207,7 +207,9 @@ install_applications() {
     # Hack Nerd Font
     log_info "Checking for Hack Nerd Font..."
     if brew list --cask font-hack-nerd-font &> /dev/null; then
-        log_success "Hack Nerd Font is already installed"
+        log_success "Hack Nerd Font is already installed (via Homebrew)"
+    elif ls ~/Library/Fonts/HackNerdFont* &>/dev/null || ls /Library/Fonts/HackNerdFont* &>/dev/null; then
+        log_success "Hack Nerd Font is already installed (system fonts)"
     else
         log_warning "Installing Hack Nerd Font..."
         if brew install --cask font-hack-nerd-font; then
@@ -242,10 +244,19 @@ deploy_dotfiles() {
     for dir in "${dotfile_dirs[@]}"; do
         if [[ -d "$dir" ]]; then
             log_info "Stowing $dir..."
-            if stow "$dir"; then
+            if stow "$dir" 2>/dev/null; then
                 log_success "$dir dotfiles deployed successfully"
             else
-                log_error "Failed to stow $dir"
+                log_warning "Conflicts detected for $dir, backing up existing files and adopting..."
+                if [[ -f "$HOME/.zshrc" && "$dir" == "zsh" ]]; then
+                    cp "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d_%H%M%S)"
+                    log_info "Backed up existing .zshrc"
+                fi
+                if stow --adopt "$dir"; then
+                    log_success "$dir dotfiles deployed successfully (with adoption)"
+                else
+                    log_error "Failed to stow $dir even with adoption"
+                fi
             fi
         else
             log_warning "$dir directory not found, skipping"
