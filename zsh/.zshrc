@@ -12,7 +12,7 @@ plugins=(
   )
 
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 zstyle ':omz:update' mode disabled  # disable automatic updates
 
