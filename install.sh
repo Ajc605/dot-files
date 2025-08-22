@@ -203,6 +203,19 @@ install_applications() {
             log_error "Failed to install Postman"
         fi
     fi
+    
+    # Hack Nerd Font
+    log_info "Checking for Hack Nerd Font..."
+    if brew list --cask font-hack-nerd-font &> /dev/null; then
+        log_success "Hack Nerd Font is already installed"
+    else
+        log_warning "Installing Hack Nerd Font..."
+        if brew install --cask font-hack-nerd-font; then
+            log_success "Hack Nerd Font installed successfully"
+        else
+            log_error "Failed to install Hack Nerd Font"
+        fi
+    fi
 }
 
 install_php_extensions() {
@@ -223,6 +236,7 @@ deploy_dotfiles() {
         "tmux"
         "starship"
         "ghostty"
+        "zsh"
     )
     
     for dir in "${dotfile_dirs[@]}"; do
