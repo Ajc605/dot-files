@@ -92,11 +92,12 @@ install_oh_my_zsh() {
         return 1
     fi
     
-    log_warning "Installing oh-my-zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    log_warning "Installing oh-my-zsh (non-interactive mode)..."
+    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     
     if [[ -d "$HOME/.oh-my-zsh" ]]; then
         log_success "oh-my-zsh installed successfully"
+        log_info "Note: You may need to change your shell to zsh manually: chsh -s $(which zsh)"
     else
         log_error "oh-my-zsh installation failed"
         return 1
