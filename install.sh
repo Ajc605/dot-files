@@ -149,6 +149,7 @@ install_development_tools() {
         "autoconf:autoconf"
         "php@8.2:php"
         "composer:composer"
+        "icu4c:icu-config"
         "yarn:yarn"
         "neovim:nvim"
         "tmux:tmux"
@@ -169,6 +170,7 @@ install_development_tools() {
     log_info "Linking versioned packages..."
     brew link --force php@8.2 2>/dev/null || log_warning "Could not link php@8.2"
     brew link --force mysql@8.4 2>/dev/null || log_warning "Could not link mysql@8.4"
+    
 }
 
 install_applications() {
