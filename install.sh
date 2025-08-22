@@ -226,6 +226,21 @@ install_applications() {
         fi
     fi
     
+    # Sublime
+    log_info "Checking for Sublime Text..."
+    if [[ -d "/Applications/Sublime Text.app" ]]; then
+        log_success "Sublime Text is already installed"
+    elif brew list --cask sublime-text &> /dev/null; then
+        log_success "Sublime Text is already installed (via Homebrew)"
+    else
+        log_warning "Installing sublime Text..."
+        if brew install --cask sublime-text; then
+            log_success "Sublime Text installed successfully"
+        else
+            log_error "Failed to install Sublime Text"
+        fi
+    fi
+    
     # Hack Nerd Font
     log_info "Checking for Hack Nerd Font..."
     if brew list --cask font-hack-nerd-font &> /dev/null; then
