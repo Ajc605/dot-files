@@ -40,4 +40,17 @@ if [ -f ~/.zshrc.work ]; then
 fi
 
 eval "$(fnm env --use-on-cd --shell zsh)"
+
+# Install and set Node.js 20 as default if not already installed
+if command -v fnm &> /dev/null; then
+    if ! fnm list | grep -q "v20"; then
+        echo "Installing Node.js 20..."
+        fnm install 20
+        fnm default 20
+    elif ! fnm list | grep -q "default.*v20"; then
+        echo "Setting Node.js 20 as default..."
+        fnm default 20
+    fi
+fi
+
 eval "$(starship init zsh)"
