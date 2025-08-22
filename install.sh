@@ -269,15 +269,15 @@ deploy_dotfiles() {
             if stow "$dir" 2>/dev/null; then
                 log_success "$dir dotfiles deployed successfully"
             else
-                log_warning "Conflicts detected for $dir, backing up existing files and adopting..."
+                log_warning "Conflicts detected for $dir, backing up and replacing..."
                 if [[ -f "$HOME/.zshrc" && "$dir" == "zsh" ]]; then
-                    cp "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d_%H%M%S)"
+                    mv "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d_%H%M%S)"
                     log_info "Backed up existing .zshrc"
                 fi
-                if stow --adopt "$dir"; then
-                    log_success "$dir dotfiles deployed successfully (with adoption)"
+                if stow "$dir"; then
+                    log_success "$dir dotfiles deployed successfully (after backup)"
                 else
-                    log_error "Failed to stow $dir even with adoption"
+                    log_error "Failed to stow $dir"
                 fi
             fi
         else
