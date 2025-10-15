@@ -40,6 +40,7 @@ if [ -f ~/.zshrc.work ]; then
 fi
 
 eval "$(fnm env --use-on-cd --shell zsh)"
+# eval "$(direnv hook zsh)"
 
 # Install and set Node.js 20 as default if not already installed
 if command -v fnm &> /dev/null; then

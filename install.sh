@@ -180,6 +180,7 @@ install_development_tools() {
         "starship:starship"
         "stow:stow"
         "bat:bat"
+        "ripgrep:ripgrep"
     )
     
     for package_info in "${packages[@]}"; do

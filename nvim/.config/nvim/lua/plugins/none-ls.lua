@@ -22,7 +22,7 @@ return {
             on_attach = function(client, bufnr)
                 local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
-                if filetype == "yaml" then
+                if filetype == "yaml" or filetype == "php" then
                     return
                 end
 
