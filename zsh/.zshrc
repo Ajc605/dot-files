@@ -1,5 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export HOMEBREW_NO_AUTO_UPDATE=1
+export XDEBUG_MODE=coverage
 
 HYPHEN_INSENSITIVE='true'
 
@@ -55,3 +56,4 @@ if command -v fnm &> /dev/null; then
 fi
 
 eval "$(starship init zsh)"
+export PATH="$HOME/.local/bin:$PATH"
