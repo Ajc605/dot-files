@@ -22,6 +22,9 @@ return {
         -- Pest testing framework support (alternative to PHPUnit)
         vim.cmd("let test#php#pest#executable = 'php vendor/bin/pest'")
 
+        -- FloaTerm keybinding
+        vim.keymap.set("n", "<leader>ft", ":FloatermToggle<CR>", { desc = "Toggle FloatTerm" })
+
         -- Key mappings
         vim.keymap.set("n", "<leader>t", ":TestNearest<CR>", { desc = "Test Nearest" })
         vim.keymap.set("n", "<leader>T", ":TestFile<CR>", { desc = "Test File" })
