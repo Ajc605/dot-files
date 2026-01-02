@@ -2,7 +2,8 @@ return {
     "vim-test/vim-test",
     dependencies = {
         "preservim/vimux",
-        "rcarriga/vim-ultest"
+        "rcarriga/vim-ultest",
+        "voldikss/vim-floaterm"
     },
     lazy = true,
     ft = { "php", "cpp" },

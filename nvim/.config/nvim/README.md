@@ -268,7 +268,7 @@ Uses **Lazy.nvim** for efficient plugin management:
 │   ├── vim-options.lua     # Core Vim settings
 │   └── plugins/            # Plugin configurations
 │       ├── symfony.lua     # Symfony console integration
-│       ├── database.lua    # Database management
+│       ├── bd.lua          # Database management
 │       ├── api-tools.lua   # API development
 │       ├── doctrine.lua    # Doctrine commands
 │       ├── yaml.lua        # YAML enhancements

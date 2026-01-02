@@ -12,7 +12,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("mason-null-ls").setup({
-                ensure_installed = { "prettierd" },
+                ensure_installed = { "prettierd", "phpstan" },
             })
         end
     },
@@ -24,10 +24,10 @@ return {
                 ensure_installed = {
                     "lua_ls",
                     "ts_ls",
-                    -- "tailwindcss",
+                    "tailwindcss",
                     "eslint",
                     -- "phpactor@2024.05.21",
-                    'intelephense',
+                    -- 'intelephense',
                     "yamlls",
                     "lemminx",
                 },
@@ -38,7 +38,6 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             local basicLsp = {
@@ -52,11 +51,12 @@ return {
             }
 
             for _, lsp in ipairs(basicLsp) do
-                lspconfig[lsp].setup({ capabilities = capabilities })
+                vim.lsp.config(lsp, { capabilities = capabilities })
+                vim.lsp.enable(lsp)
             end
 
             -- Enhanced Intelephense setup for Symfony development
-            -- lspconfig.intelephense.setup({
+            -- vim.lsp.config('intelephense', {
             --     capabilities = capabilities,
             --     settings = {
             --         intelephense = {
@@ -109,14 +109,15 @@ return {
             --         buf_set_keymap("n", "<leader>ri", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
             --         buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
             --     end,
-            --     root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
+            --     root_dir = vim.fs.root(0, { "composer.json", ".git" }),
             --     filetypes = { "php" },
             --     flags = {
             --         debounce_text_changes = 150,
             --     },
             -- })
+            -- vim.lsp.enable('intelephense')
             --
-            lspconfig.phpactor.setup({
+            vim.lsp.config('phpactor', {
                 capabilities = capabilities,
                 on_attach = function(client, bufnr)
                     local function buf_set_keymap(...)
@@ -149,7 +150,7 @@ return {
                 },
                 cmd = { "phpactor", "language-server" },
                 -- Add root directory detection
-                root_dir = lspconfig.util.root_pattern("composer.json", ".git", "phpactor.json", "phpactor.yml"),
+                root_dir = vim.fs.root(0, { "composer.json", ".git", "phpactor.json", "phpactor.yml" }),
                 -- Add file type restrictions
                 filetypes = { "php" },
                 -- Add timeout settings
@@ -157,6 +158,7 @@ return {
                     debounce_text_changes = 150,
                 },
             })
+            vim.lsp.enable('phpactor')
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})

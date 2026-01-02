@@ -13,7 +13,18 @@ return {
         null_ls.setup({
             sources = {
                 null_ls.builtins.formatting.prettierd,
-                null_ls.builtins.diagnostics.phpstan,
+                -- Prefer project's vendor/bin/phpstan, fallback to global
+                null_ls.builtins.diagnostics.phpstan.with({
+                    prefer_local = "vendor/bin",
+                    extra_args = function()
+                        -- Use project's phpstan.neon if it exists
+                        local config_file = vim.fn.findfile("phpstan.neon", ".;")
+                        if config_file ~= "" then
+                            return { "-c", config_file }
+                        end
+                        return {}
+                    end,
+                }),
                 null_ls.builtins.completion.spell,
                 null_ls.builtins.formatting.prettier.with({
                     filetypes = { "twig" },
